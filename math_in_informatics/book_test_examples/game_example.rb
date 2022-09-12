@@ -15,3 +15,5 @@ while user_answer != query_number && attempts > 0
     end
     attempts-=1
 end
+if attempts == 0
+    puts("Bad game")
