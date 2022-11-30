@@ -10,7 +10,7 @@ for i in 1:n
     a = parse(Int32,tmp[3])
     if (x<=p) & (p<=x+a) & (y-a<=q) & (q<=y)
         println(i)
-        cnt = cnt +1
+        global cnt = cnt +1
     end
 end
 if (cnt == 0)

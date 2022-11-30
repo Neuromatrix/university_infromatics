@@ -1,3 +1,6 @@
+module lb
+
+export  input, sortmatrix
 function input()
     n = parse(Int32, readline())
     m = parse(Int32, readline())
@@ -12,7 +15,6 @@ function input()
 end
 
 function sortmatrix(n,m,matrix)
-    summ = Array{Int32}(undef, n)
     a = (sortperm(view.(Ref(matrix), 1:size(matrix,1), :), rev=true))
     ansmatrix = zeros(Int32,n,m)
     for i in 1:n
@@ -23,7 +25,7 @@ function sortmatrix(n,m,matrix)
 
     return ansmatrix
 end
-n,m,matrix = input()
-println(sortmatrix(n,m,matrix))
+end
+
 
 
