@@ -4,12 +4,12 @@
 #include <set>
 #include <list>
 #include <iostream>
-std::list<std::string> split(std::string s){
-    std::string delimiter = " ";
+std::list<std::wstring> split(std::wstring s){
+    std::wstring delimiter = L" ";
     size_t pos = 0;
-    std::string token;
-    std::list <std::string> splitten_string;
-    while ((pos = s.find(delimiter)) != std::string::npos) {
+    std::wstring token;
+    std::list <std::wstring> splitten_string;
+    while ((pos = s.find(delimiter)) != std::wstring::npos) {
         token = s.substr(0, pos);
         splitten_string.push_back(token);
         s.erase(0, pos + delimiter.length());
@@ -17,25 +17,25 @@ std::list<std::string> split(std::string s){
     splitten_string.push_back(s);
     return splitten_string;
 }
-std::vector<std::string> find_in_tasks(const std::map<std::string,std::string> &data, const std::string& pattern){
-    std::list<std::string> np = split(pattern);
-    np.push_front("&");
-    std::map<std::string,std::string> res = data;
-    std::vector<std::string> task_numbers = {};
+std::vector<std::wstring> find_in_tasks(const std::map<std::wstring,std::wstring> &data, const std::wstring& pattern){
+    std::list<std::wstring> np = split(pattern);
+    np.push_front(L"&");
+    std::map<std::wstring,std::wstring> res = data;
+    std::vector<std::wstring> task_numbers = {};
     while (np.size()){
-        std::string operand = np.front();
+        std::wstring operand = np.front();
         np.pop_front();
-        std::string token = np.front();
+        std::wstring token = np.front();
         np.pop_front();
-        if (operand == "&" || operand == "&&"){
+        if (operand == L"&" || operand == L"&&"){
             for(const auto & it : data){
-                if(it.second.find(token)==std::string::npos){
+                if(it.second.find(token)==std::wstring::npos){
                     res.erase(it.first);
                 }
             }
-        } else if (operand == "|" || operand == "||"){
+        } else if (operand == L"|" || operand == L"||"){
             for(const auto & it : data){
-                if(it.second.find(token)!=std::string::npos){
+                if(it.second.find(token)!=std::wstring::npos){
                     res.insert({it.first,it.second});
                 }
             }

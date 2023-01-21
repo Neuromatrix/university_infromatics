@@ -6,10 +6,10 @@ function input()
     arr = []
     str = split(readline()," ")
     for i in 1:3*n
-        l = parse(Int32, readline())
+        l = parse(Int32, str[i])
         push!(arr,l);
     end
-    return n,arr
+    return arr,n
 end
 
 function triangle_type(data,n)

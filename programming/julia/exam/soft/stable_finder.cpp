@@ -1,20 +1,24 @@
 #include "finder.hpp"
 #include <fstream>
-
+#include <codecvt>
 int main(){
-    std::ifstream in("tasks.txt");
-    std::map<std::string,std::string> data;
-    std::string num, task,patt = "";
+    std::wstring str;
+    std::wifstream in("tasks.txt", std::ios::binary);
+    std::wofstream outt("outt.txt");
+    in.imbue(std::locale(in.getloc(),
+        new std::codecvt_utf16<wchar_t, 0x10ffff, std::little_endian>));
+    std::map<std::wstring,std::wstring> data;
+    std::wstring num, task,patt = L"empty";
     while (in >> num){
-        getline(in,task);
+        std::getline(in,task);
         data[num] = task;
-        std::cout << num << " " << task << std::endl;
+        outt << task;
     }
-    while (patt != "exit"){
-        getline(std::cin,patt);
-        std::vector <std::string> a = find_in_tasks(data,patt);
+    while (patt != L"exit"){
+        std::getline(std::wcin,patt);
+        std::vector <std::wstring> a = find_in_tasks(data,patt);
         for (const auto &it :a ){
-            std::cout << it << std:: endl;
+            std::wcout << it << std:: endl;
         }
     }
 
